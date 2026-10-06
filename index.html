@@ -300,7 +300,7 @@
 
       <div class="project-card">
         <div class="project-header">
-          <span class="project-title">Infraestrutura VoIP Corporativo — SETHAS/RN</span>
+          <span class="project-title">Infraestrutura VoIP Corporativo - SETHAS/RN</span>
           <span class="project-status status-live">produção</span>
         </div>
         <p class="project-desc">
@@ -308,24 +308,23 @@
           Gateways analógicos Khomp EBS-FXS, servidor K3L e Asterisk em container Docker
           sobre um Dell EMC PowerEdge R240. Inclui diagnóstico e correção de conflito de serviços
           SysV init.d concorrendo no mesmo socket SIP — reescrita do script mestre de
-          inicialização para garantir order e resiliência em produção.
+          inicialização para garantir ordem e resiliência em produção.
         </p>
         <div class="project-tags tags">
           <span class="tag">Asterisk</span><span class="tag">Docker</span><span class="tag">Khomp</span>
           <span class="tag">SIP</span><span class="tag">Linux</span><span class="tag">SysV init</span>
         </div>
-        <a class="project-link" href="https://github.com/21nho" target="_blank">→ documentação em breve</a>
+        <a class="project-link" href="https://github.com/21nho/sethas-pabx" target="_blank">→ Repositório</a>
       </div>
 
       <div class="project-card">
         <div class="project-header">
-          <span class="project-title">Reestruturação de Rede — Segmentação VLAN + Firewall</span>
+          <span class="project-title">Reestruturação de Rede - SETHAS/RN</span>
           <span class="project-status status-doc">documentando</span>
         </div>
         <p class="project-desc">
-          Redesenho completo da rede do prédio da SETHAS com segmentação por VLANs e
-          políticas de firewall no pfSense, reduzindo domínios de broadcast e isolando
-          tráfego crítico de serviços sensíveis.
+          Redesenho completo da rede do prédio da SETHAS com segmentação por VLANs, 
+          políticas de firewall no pfSense, configuração de VoIP, reestruturação das VM's, e documentação detalhada com NetBox. 
         </p>
         <div class="project-tags tags">
           <span class="tag">pfSense</span><span class="tag">VLANs</span><span class="tag">Firewall</span>
@@ -340,18 +339,15 @@
           <span class="project-status status-live">produção</span>
         </div>
         <p class="project-desc">
-          Pipeline próprio de build e deploy para plataforma educacional com ~milhares de usuários:
-          build local → publicação no Amazon ECR → deploy em EC2 via script de orquestração
-          próprio, em ambientes de produção e homologação. Configuração completa de VPC,
-          ALB, IAM, S3, RDS e Route 53. Stack de observabilidade com Prometheus e Grafana,
-          incluindo diagramas de arquitetura de rede da VPC.
+          Pipeline de build e deploy para plataforma educacional com milhares de usuários. Configuração completa de VPC,
+          ALB, IAM, S3, RDS e Route 53. Stack de observabilidade com Prometheus e Grafana, incluindo diagramas de arquitetura de rede da VPC.
         </p>
         <div class="project-tags tags">
           <span class="tag">AWS</span><span class="tag">ECR</span><span class="tag">GitHub Actions</span>
           <span class="tag">Prometheus</span><span class="tag">Grafana</span>
           <span class="tag">PostgreSQL</span><span class="tag">Docker</span>
         </div>
-        <a class="project-link" href="https://github.com/21nho" target="_blank">→ repositório</a>
+        <a class="project-link" href="https://github.com/21nho" target="_blank"> repositório privado</a>
       </div>
 
       <div class="project-card">
@@ -361,12 +357,11 @@
         </div>
         <p class="project-desc">
           Estruturação de servidor de backup com OpenMediaVault e MergerFS para unificação
-          de volumes, com scripts Python/Bash para backup automatizado e envio programado
-          ao S3 via crontab.
+          de volumes.
         </p>
         <div class="project-tags tags">
           <span class="tag">OpenMediaVault</span><span class="tag">MergerFS</span>
-          <span class="tag">S3</span><span class="tag">Python</span><span class="tag">Bash</span>
+          <span class="tag">Bash</span>
         </div>
       </div>
 
@@ -412,11 +407,11 @@
       <div class="exp-item">
         <div class="exp-header">
           <span class="exp-role">Bolsista — DevOps Engineer, Projeto IFOCUS</span>
-          <span class="exp-period">out 2025 → mai 2026</span>
+          <span class="exp-period">out 2025 → atual</span>
         </div>
         <p class="exp-org">IFRN — Campus Natal Central (parceria MEC)</p>
         <ul class="exp-bullets">
-          <li>Pipeline CI/CD próprio: ECR → EC2 com script de orquestração</li>
+          <li>Pipeline CI/CD: ECR → EC2 com script de orquestração</li>
           <li>Configuração de VPC, ALB, IAM, S3, RDS e Route 53</li>
           <li>Stack de observabilidade Prometheus + Grafana em produção e homologação</li>
         </ul>
@@ -470,7 +465,7 @@
         <span class="cert-icon">📡</span>
         <div>
           <p class="cert-name">Minicursos em Roteamento Dinâmico BGP e OSPF</p>
-          <p class="cert-meta">ministrador dos cursos</p>
+          <p class="cert-meta">Ministrador dos cursos</p>
         </div>
       </div>
     </div>
