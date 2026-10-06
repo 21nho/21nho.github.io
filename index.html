@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Victor Diniz — Infra & Redes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #0d1117;
+    --surface:   #161b22;
+    --border:    #21262d;
+    --accent:    #58a6ff;
+    --accent2:   #3fb950;
+    --muted:     #8b949e;
+    --text:      #e6edf3;
+    --text-dim:  #c9d1d9;
+    --mono:      'IBM Plex Mono', monospace;
+    --sans:      'Inter', system-ui, sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.6;
+    padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px)
+             env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
+  }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* ── LAYOUT ── */
+  .wrapper { max-width: 820px; margin: 0 auto; padding: 0 24px; }
+
+  /* ── HEADER / HERO ── */
+  header {
+    border-bottom: 1px solid var(--border);
+    padding: 56px 0 48px;
+  }
+  .hero-label {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent2);
+    letter-spacing: .04em;
+    margin-bottom: 16px;
+  }
+  .hero-name {
+    font-size: clamp(28px, 5vw, 44px);
+    font-weight: 600;
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+  .hero-name span { color: var(--accent); }
+  .hero-role {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 24px;
+  }
+  .hero-bio {
+    max-width: 60ch;
+    color: var(--text-dim);
+    margin-bottom: 28px;
+    font-size: 15px;
+  }
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .link-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text-dim);
+    transition: border-color .15s, color .15s;
+  }
+  .link-chip:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+  .link-chip svg { width: 14px; height: 14px; fill: currentColor; }
+
+  /* ── SECTIONS ── */
+  section { padding: 48px 0; border-bottom: 1px solid var(--border); }
+  section:last-child { border-bottom: none; }
+  .section-title {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent2);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  /* ── STACK ── */
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 12px;
+  }
+  .stack-group { }
+  .stack-group-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 3px 8px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text-dim);
+    background: var(--surface);
+  }
+
+  /* ── PROJECTS ── */
+  .projects { display: flex; flex-direction: column; gap: 16px; }
+  .project-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 22px;
+    background: var(--surface);
+    transition: border-color .15s;
+  }
+  .project-card:hover { border-color: var(--accent); }
+  .project-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+  .project-title {
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--text);
+  }
+  .project-status {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .status-live   { background: rgba(63,185,80,.12); color: var(--accent2); border: 1px solid rgba(63,185,80,.3); }
+  .status-wip    { background: rgba(210,153,34,.12); color: #d29922; border: 1px solid rgba(210,153,34,.3); }
+  .status-doc    { background: rgba(88,166,255,.12); color: var(--accent); border: 1px solid rgba(88,166,255,.3); }
+  .project-desc  { color: var(--muted); font-size: 14px; margin-bottom: 14px; line-height: 1.55; }
+  .project-tags  { display: flex; flex-wrap: wrap; gap: 6px; }
+  .project-link  {
+    display: inline-block;
+    margin-top: 12px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+  }
+
+  /* ── EXPERIENCE ── */
+  .exp-list { display: flex; flex-direction: column; gap: 28px; }
+  .exp-item { display: grid; grid-template-columns: 1fr; gap: 4px; }
+  .exp-header { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px; }
+  .exp-role { font-weight: 600; font-size: 15px; }
+  .exp-period { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+  .exp-org { font-size: 13px; color: var(--accent); margin-bottom: 8px; }
+  .exp-bullets { padding-left: 18px; }
+  .exp-bullets li { color: var(--text-dim); font-size: 14px; margin-bottom: 4px; line-height: 1.55; }
+
+  /* ── CERT ── */
+  .cert-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 18px;
+    background: var(--surface);
+  }
+  .cert-icon { font-size: 28px; flex-shrink: 0; }
+  .cert-name { font-weight: 600; font-size: 14px; }
+  .cert-meta { font-family: var(--mono); font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 32px 0 40px;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  @media (max-width: 600px) {
+    header { padding: 36px 0 32px; }
+    .stack-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrapper">
+
+  <!-- HERO -->
+  <header>
+    <p class="hero-label">// portfólio técnico</p>
+    <h1 class="hero-name">Victor <span>Diniz</span></h1>
+    <p class="hero-role">Infra & Redes · DevOps & Cloud · Natal, RN</p>
+    <p class="hero-bio">
+      Técnico em Redes de Computadores (IFRN), com experiência prática em infraestrutura
+      on-premise e cloud — de segmentação de rede e VoIP corporativo a pipelines CI/CD e
+      observabilidade em produção. Foco em diagnóstico de causa raiz e ambientes de alta disponibilidade.
+    </p>
+    <div class="links">
+      <a class="link-chip" href="https://github.com/21nho" target="_blank">
+        <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        github.com/21nho
+      </a>
+      <a class="link-chip" href="https://linkedin.com/in/victor-m-diniz" target="_blank">
+        <svg viewBox="0 0 16 16"><path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/></svg>
+        LinkedIn
+      </a>
+      <a class="link-chip" href="mailto:victordiniz0025@gmail.com">
+        <svg viewBox="0 0 16 16"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"/></svg>
+        victordiniz0025@gmail.com
+      </a>
+    </div>
+  </header>
+
+  <!-- STACK -->
+  <section>
+    <p class="section-title">stack técnico</p>
+    <div class="stack-grid">
+      <div class="stack-group">
+        <p class="stack-group-label">Redes</p>
+        <div class="tags">
+          <span class="tag">VLANs</span><span class="tag">pfSense</span><span class="tag">BGP</span>
+          <span class="tag">OSPF</span><span class="tag">DNS/DHCP</span><span class="tag">VPN</span>
+          <span class="tag">TCP/IP</span><span class="tag">SNMP</span>
+        </div>
+      </div>
+      <div class="stack-group">
+        <p class="stack-group-label">Servidores & SO</p>
+        <div class="tags">
+          <span class="tag">Linux</span><span class="tag">Windows Server</span>
+          <span class="tag">Active Directory</span><span class="tag">LDAP</span>
+        </div>
+      </div>
+      <div class="stack-group">
+        <p class="stack-group-label">Cloud & DevOps</p>
+        <div class="tags">
+          <span class="tag">AWS EC2</span><span class="tag">S3</span><span class="tag">RDS</span>
+          <span class="tag">VPC</span><span class="tag">ALB</span><span class="tag">IAM</span>
+          <span class="tag">Route 53</span><span class="tag">Docker</span>
+          <span class="tag">GitHub Actions</span><span class="tag">Jenkins</span>
+        </div>
+      </div>
+      <div class="stack-group">
+        <p class="stack-group-label">Monitoramento</p>
+        <div class="tags">
+          <span class="tag">Prometheus</span><span class="tag">Grafana</span><span class="tag">Zabbix</span>
+        </div>
+      </div>
+      <div class="stack-group">
+        <p class="stack-group-label">Automação</p>
+        <div class="tags">
+          <span class="tag">Ansible</span><span class="tag">Python</span>
+          <span class="tag">Bash</span><span class="tag">crontab</span>
+        </div>
+      </div>
+      <div class="stack-group">
+        <p class="stack-group-label">Dados & Storage</p>
+        <div class="tags">
+          <span class="tag">PostgreSQL</span><span class="tag">MySQL</span>
+          <span class="tag">OpenMediaVault</span><span class="tag">MergerFS</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJETOS -->
+  <section>
+    <p class="section-title">projetos</p>
+    <div class="projects">
+
+      <div class="project-card">
+        <div class="project-header">
+          <span class="project-title">Infraestrutura VoIP Corporativo — SETHAS/RN</span>
+          <span class="project-status status-live">produção</span>
+        </div>
+        <p class="project-desc">
+          Projeto do zero de central telefônica cobrindo 24 ramais físicos na Secretaria de Estado.
+          Gateways analógicos Khomp EBS-FXS, servidor K3L e Asterisk em container Docker
+          sobre um Dell EMC PowerEdge R240. Inclui diagnóstico e correção de conflito de serviços
+          SysV init.d concorrendo no mesmo socket SIP — reescrita do script mestre de
+          inicialização para garantir order e resiliência em produção.
+        </p>
+        <div class="project-tags tags">
+          <span class="tag">Asterisk</span><span class="tag">Docker</span><span class="tag">Khomp</span>
+          <span class="tag">SIP</span><span class="tag">Linux</span><span class="tag">SysV init</span>
+        </div>
+        <a class="project-link" href="https://github.com/21nho" target="_blank">→ documentação em breve</a>
+      </div>
+
+      <div class="project-card">
+        <div class="project-header">
+          <span class="project-title">Reestruturação de Rede — Segmentação VLAN + Firewall</span>
+          <span class="project-status status-doc">documentando</span>
+        </div>
+        <p class="project-desc">
+          Redesenho completo da rede do prédio da SETHAS com segmentação por VLANs e
+          políticas de firewall no pfSense, reduzindo domínios de broadcast e isolando
+          tráfego crítico de serviços sensíveis.
+        </p>
+        <div class="project-tags tags">
+          <span class="tag">pfSense</span><span class="tag">VLANs</span><span class="tag">Firewall</span>
+          <span class="tag">LAN/WAN</span>
+        </div>
+        <a class="project-link" href="https://github.com/21nho" target="_blank">→ diagrama em breve</a>
+      </div>
+
+      <div class="project-card">
+        <div class="project-header">
+          <span class="project-title">Pipeline CI/CD & Infra AWS — IFOCUS (parceria MEC)</span>
+          <span class="project-status status-live">produção</span>
+        </div>
+        <p class="project-desc">
+          Pipeline próprio de build e deploy para plataforma educacional com ~milhares de usuários:
+          build local → publicação no Amazon ECR → deploy em EC2 via script de orquestração
+          próprio, em ambientes de produção e homologação. Configuração completa de VPC,
+          ALB, IAM, S3, RDS e Route 53. Stack de observabilidade com Prometheus e Grafana,
+          incluindo diagramas de arquitetura de rede da VPC.
+        </p>
+        <div class="project-tags tags">
+          <span class="tag">AWS</span><span class="tag">ECR</span><span class="tag">GitHub Actions</span>
+          <span class="tag">Prometheus</span><span class="tag">Grafana</span>
+          <span class="tag">PostgreSQL</span><span class="tag">Docker</span>
+        </div>
+        <a class="project-link" href="https://github.com/21nho" target="_blank">→ repositório</a>
+      </div>
+
+      <div class="project-card">
+        <div class="project-header">
+          <span class="project-title">Servidor de Backup com OpenMediaVault + MergerFS</span>
+          <span class="project-status status-live">produção</span>
+        </div>
+        <p class="project-desc">
+          Estruturação de servidor de backup com OpenMediaVault e MergerFS para unificação
+          de volumes, com scripts Python/Bash para backup automatizado e envio programado
+          ao S3 via crontab.
+        </p>
+        <div class="project-tags tags">
+          <span class="tag">OpenMediaVault</span><span class="tag">MergerFS</span>
+          <span class="tag">S3</span><span class="tag">Python</span><span class="tag">Bash</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-header">
+          <span class="project-title">TV Box como Terminal Linux de Baixo Custo</span>
+          <span class="project-status status-live">publicado</span>
+        </div>
+        <p class="project-desc">
+          Conversão de aparelhos TV Box obsoletos em terminais leves rodando Linux, com
+          documentação técnica completa para reaproveitamento de hardware por estudantes
+          do IFRN. Projeto de acessibilidade tecnológica.
+        </p>
+        <div class="project-tags tags">
+          <span class="tag">Linux</span><span class="tag">ARM</span><span class="tag">Hardware</span>
+        </div>
+        <a class="project-link" href="https://github.com/21nho/Transformando-aparelhos-Tvbox-em-terminais-leves-de-baixo-custo" target="_blank">→ github.com/21nho/Transformando-aparelhos...</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EXPERIÊNCIA -->
+  <section>
+    <p class="section-title">experiência</p>
+    <div class="exp-list">
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <span class="exp-role">Estagiário de TI</span>
+          <span class="exp-period">abr 2026 → atual</span>
+        </div>
+        <p class="exp-org">SETHAS — Secretaria de Estado do Trabalho, da Habitação e da Assistência Social do RN</p>
+        <ul class="exp-bullets">
+          <li>Reestruturação de rede com segmentação VLAN e firewall pfSense</li>
+          <li>Infraestrutura VoIP do zero (Khomp + Asterisk + Docker) — 24 ramais físicos</li>
+          <li>Monitoramento com Zabbix e Grafana; backup com OpenMediaVault/MergerFS</li>
+          <li>Provisionamento e gerenciamento de VMs com Ansible</li>
+          <li>Administração de Active Directory e suporte N1/N2</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <span class="exp-role">Bolsista — DevOps Engineer, Projeto IFOCUS</span>
+          <span class="exp-period">out 2025 → mai 2026</span>
+        </div>
+        <p class="exp-org">IFRN — Campus Natal Central (parceria MEC)</p>
+        <ul class="exp-bullets">
+          <li>Pipeline CI/CD próprio: ECR → EC2 com script de orquestração</li>
+          <li>Configuração de VPC, ALB, IAM, S3, RDS e Route 53</li>
+          <li>Stack de observabilidade Prometheus + Grafana em produção e homologação</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <span class="exp-role">Estagiário de TI</span>
+          <span class="exp-period">jul → dez 2025</span>
+        </div>
+        <p class="exp-org">IDUS</p>
+        <ul class="exp-bullets">
+          <li>Suporte N1/N2, administração de usuários no Active Directory</li>
+          <li>Monitoramento de sistemas e troubleshooting de infraestrutura</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <span class="exp-role">Bolsista — Diretoria Geral de TI</span>
+          <span class="exp-period">mai → jul 2025</span>
+        </div>
+        <p class="exp-org">IFRN — Campus Natal Central</p>
+        <ul class="exp-bullets">
+          <li>Suporte N1/N2 e administração de usuários no Active Directory</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CERTIFICAÇÕES -->
+  <section>
+    <p class="section-title">certificações & formação</p>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <div class="cert-card">
+        <span class="cert-icon">🎓</span>
+        <div>
+          <p class="cert-name">Tecnologia em Redes de Computadores</p>
+          <p class="cert-meta">IFRN — Campus Natal Central · mar 2023 → dez 2026 (cursando, faltando TCC)</p>
+        </div>
+      </div>
+      <div class="cert-card">
+        <span class="cert-icon">🔒</span>
+        <div>
+          <p class="cert-name">CCNA: Introduction to Networks</p>
+          <p class="cert-meta">Cisco Networking Academy · ago 2025</p>
+        </div>
+      </div>
+      <div class="cert-card">
+        <span class="cert-icon">📡</span>
+        <div>
+          <p class="cert-name">Minicursos em Roteamento Dinâmico BGP e OSPF</p>
+          <p class="cert-meta">ministrador dos cursos</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Victor Mateus da Silva Diniz · Natal, RN ·
+    <a href="https://github.com/21nho">github.com/21nho</a>
+  </footer>
+
+</div>
+</body>
+</html>
